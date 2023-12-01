@@ -113,7 +113,7 @@
                     }
                 case "System.Char":
                     {
-                        result = string.Empty[0];
+                        result = LOREM_IPSUM.Replace(" ", "")[rng.Next(0, LOREM_IPSUM.Replace(" ", "").Length)];
                         break;
                     }
                 case "System.Int16":
@@ -141,7 +141,15 @@
                     }
                 case "System.DateTime":
                     {
-                        result = new DateTime();
+                        int year = rng.Next(1997, DateTime.Now.Year);
+                        int month = rng.Next(1, 12);
+                        int day = month == 2
+                                ? DateTime.IsLeapYear(year)
+                                    ? rng.Next(1, 29)
+                                    : rng.Next(1, 28)
+                                : rng.Next(1, 31)
+                                ;
+                        result = new DateTime(year, month, day);
                         break;
                     }
                 default:
